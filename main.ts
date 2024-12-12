@@ -7,7 +7,7 @@ function R6 () {
     game.splash("You passed this level!!")
     mySprite.sayText("YAY", 500, false)
     _6 = list.indexOf(randint(0, 10))
-    game.splash("Your first number is ", _6)
+    game.splash("Your sixth number is ", _6)
     RoomNumber6done = true
     answer = game.askForNumber("What is the code?", 6)
     if (answer == _1 * 100000 + (_2 * 10000 + (_3 * 1000 + (_4 * 100 + (_5 * 10 + _6 * 1))))) {
@@ -60,14 +60,14 @@ function R3 () {
     game.splash("You passed this level!!")
     mySprite.sayText("YAY", 500, false)
     _3 = list.indexOf(randint(0, 10))
-    game.splash("Your first number is ", _3)
+    game.splash("Your third number is ", _3)
     RoomNumber3done = true
 }
 function R4 () {
     game.splash("You passed this level!!")
     mySprite.sayText("YAY", 500, false)
     _4 = list.indexOf(randint(0, 10))
-    game.splash("Your first number is ", _4)
+    game.splash("Your fourth number is ", _4)
     RoomNumber4done = true
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
@@ -78,7 +78,7 @@ function R5 () {
     game.splash("You passed this level!!")
     mySprite.sayText("YAY", 500, false)
     _5 = list.indexOf(randint(0, 10))
-    game.splash("Your first number is ", _5)
+    game.splash("Your fifth number is ", _5)
     RoomNumber5done = true
 }
 let mySprite2: Sprite = null
