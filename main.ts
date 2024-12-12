@@ -3,6 +3,10 @@ namespace ConnectionKind {
     export const Door4 = ConnectionKind.create()
     export const Door5 = ConnectionKind.create()
 }
+info.onScore(10, function () {
+    game.splash("You passed this level!!")
+    mySprite.sayText("YAY")
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     info.changeScoreBy(1)
     sprites.destroy(otherSprite)
@@ -30,10 +34,6 @@ function _1 (R1: boolean) {
             . c c c c c c c . . . . . . . . 
             `, SpriteKind.Food)
         mySprite2.setPosition(randint(20, 200), randint(20, 200))
-    }
-    if (info.score() == 10) {
-        game.splash("You passed this level!!")
-        mySprite.sayText("YAY")
     }
 }
 let mySprite2: Sprite = null
