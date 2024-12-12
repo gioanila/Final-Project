@@ -5,17 +5,8 @@ namespace ConnectionKind {
 }
 function R6 () {
     tiles.loadMap(tiles.createMap(tilemap`level17`))
-    mySprite.setPosition(20, 20)
-    game.splash("You passed this level!!")
-    mySprite.sayText("YAY", 500, false)
-    game.splash("Your sixth number is", _6)
-    RoomNumber6done = true
-    answer = game.askForNumber("What is the code?", 6)
-    if (answer == _1 * 100000 + (_2 * 10000 + (_3 * 1000 + (_4 * 100 + (_5 * 10 + _6 * 1))))) {
-        game.splash("You escaped!")
-    } else {
-        game.splash("Start over :(")
-    }
+    tiles.placeOnRandomTile(mySprite, assets.tile`myTile7`)
+    mySprite.sayText("Room 6...I need to get the token")
 }
 function R1 () {
     info.setScore(0)
@@ -75,7 +66,7 @@ function R2 () {
         ........................
         ........................
         ........................
-        `, SpriteKind.Player)
+        `, SpriteKind.Enemy)
     villain.follow(mySprite, 30)
     game.splash("You passed this level!!")
     mySprite.sayText("YAY", 500, false)
@@ -100,6 +91,18 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
     info.changeScoreBy(1)
     sprites.destroy(otherSprite)
 })
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleRedCrystal, function (sprite, location) {
+    game.splash("You passed this level!!")
+    mySprite.sayText("YAY", 500, false)
+    game.splash("Your sixth number is", _6)
+    RoomNumber6done = true
+    answer = game.askForNumber("What is the code?", 6)
+    if (answer == _1 * 100000 + (_2 * 10000 + (_3 * 1000 + (_4 * 100 + (_5 * 10 + _6 * 1))))) {
+        game.splash("You escaped!")
+    } else {
+        game.splash("Start over :(")
+    }
+})
 function R5 () {
     tiles.loadMap(tiles.createMap(tilemap`level15`))
     game.splash("You passed this level!!")
@@ -107,9 +110,9 @@ function R5 () {
     game.splash("Your fifth number is", _5)
     RoomNumber5done = true
 }
+let answer = 0
 let villain: Sprite = null
 let mySprite2: Sprite = null
-let answer = 0
 let RoomNumber6done = false
 let RoomNumber5done = false
 let RoomNumber4done = false
@@ -123,9 +126,6 @@ let _4 = 0
 let _3 = 0
 let _2 = 0
 let _1 = 0
-while (false) {
-    music.play(music.createSong(hex`0078000408020107001c00020a006400f401640000040000000000000000000000000000000003260000000400011e0c001000031d24291400180001241c002000012730003400012538003c000124`), music.PlaybackMode.UntilDone)
-}
 mySprite = sprites.create(img`
     . . . . . . 5 . 5 . . . . . . . 
     . . . . . f 5 5 5 f f . . . . . 
@@ -375,7 +375,7 @@ mySprite,
 200,
 characterAnimations.rule(Predicate.MovingDown)
 )
-game.splash("Welcome to the dungeons... you have 15 minutes to leave before they implode on top of you. Find numbers by going through 6 rooms and completing the challenges, then create a code in order to escape. Best of luck!")
+game.showLongText("Welcome to the dungeons... you have 15 minutes to leave before they implode on top of you. Find numbers by going through 6 rooms and completing the challenges, then create a code in order to escape. Best of luck!", DialogLayout.Center)
 pauseUntil(() => true)
 info.startCountdown(900)
 RoomNumber1done = false
@@ -430,4 +430,7 @@ if (RoomNumber1done == false) {
             }
         }
     }
+}
+while (characterAnimations.matchesRule(mySprite, characterAnimations.rule(Predicate.Moving, Predicate.NotMoving))) {
+    music.play(music.createSong(hex`0078000408030300001c00010a006400f401640000040000000000000000000000000005000004120008000c00012010001400012718001c00011d07001c00020a006400f401640000040000000000000000000000000000000003260000000400011e0c001000031d24291400180001241c002000012730003400012538003c00012409010e02026400000403780000040a000301000000640001c80000040100000000640001640000040100000000fa0004af00000401c80000040a00019600000414000501006400140005010000002c0104dc00000401fa0000040a0001c8000004140005d0076400140005d0070000c800029001f40105c201f4010a0005900114001400039001000005c201f4010500058403050032000584030000fa00049001000005c201f4010500058403c80032000584030500640005840300009001049001000005c201f4010500058403c80064000584030500c8000584030000f40105ac0d000404a00f00000a0004ac0d2003010004a00f0000280004ac0d9001010004a00f0000280002d00700040408070f0064000408070000c80003c800c8000e7d00c80019000e64000f0032000e78000000fa00032c01c8000ee100c80019000ec8000f0032000edc000000fa0003f401c8000ea901c80019000e90010f0032000ea4010000fa0001c8000004014b000000c800012c01000401c8000000c8000190010004012c010000c80002c800000404c8000f0064000496000000c80002c2010004045e010f006400042c010000640002c409000404c4096400960004f6090000f40102b80b000404b80b64002c0104f40b0000f401022003000004200300040a000420030000ea01029001000004900100040a000490010000900102d007000410d0076400960010d0070000c8001800100011000105240025000105280029000107380039000102`), music.PlaybackMode.UntilDone)
 }
