@@ -7,6 +7,33 @@ function R6 () {
     tiles.loadMap(tiles.createMap(tilemap`level17`))
     tiles.placeOnTile(mySprite, tiles.getTileLocation(1, 1))
 }
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    projectile = sprites.createProjectileFromSprite(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . f f f . . . . . . . 
+        . . . . . . f f f . . . . . . . 
+        . . . . . . f f f . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, mySprite, randint(-100, 100), randint(-100, 100))
+})
+sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite, otherSprite) {
+    sprites.destroy(sprite)
+    game.splash("You passed this level!!")
+    mySprite.sayText("YAY", 500, false)
+    game.splash("Your second number is", _2)
+    RoomNumber2done = true
+})
 function R1 () {
     info.setScore(0)
     mySprite.sayText("Room 1... looks like I just need to collect 10 fruits.", 3000, false)
@@ -40,6 +67,7 @@ info.onScore(10, function () {
     RoomNumber1done = true
 })
 function R2 () {
+    tiles.placeOnTile(mySprite, tiles.getTileLocation(8, 8))
     tiles.loadMap(tiles.createMap(tilemap`level2`))
     villain = sprites.create(img`
         ........................
@@ -68,10 +96,7 @@ function R2 () {
         ........................
         `, SpriteKind.Enemy)
     villain.follow(mySprite, 30)
-    game.splash("You passed this level!!")
-    mySprite.sayText("YAY", 500, false)
-    game.splash("Your second number is", _2)
-    RoomNumber2done = true
+    tiles.placeOnTile(villain, tiles.getTileLocation(randint(0, tiles.tileWidth()), 0))
 }
 function R3 () {
     tiles.loadMap(tiles.createMap(tilemap`level8`))
@@ -114,6 +139,7 @@ function R5 () {
 let answer = 0
 let villain: Sprite = null
 let mySprite2: Sprite = null
+let projectile: Sprite = null
 let RoomNumber6done = false
 let RoomNumber5done = false
 let RoomNumber4done = false
