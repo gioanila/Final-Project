@@ -5,17 +5,7 @@ namespace ConnectionKind {
 }
 function R6 () {
     tiles.loadMap(tiles.createMap(tilemap`level17`))
-    mySprite.setPosition(20, 20)
-    game.splash("You passed this level!!")
-    mySprite.sayText("YAY", 500, false)
-    game.splash("Your sixth number is", _6)
-    RoomNumber6done = true
-    answer = game.askForNumber("What is the code?", 6)
-    if (answer == _1 * 100000 + (_2 * 10000 + (_3 * 1000 + (_4 * 100 + (_5 * 10 + _6 * 1))))) {
-        game.splash("You escaped!")
-    } else {
-        game.splash("Start over :(")
-    }
+    tiles.placeOnTile(mySprite, tiles.getTileLocation(1, 1))
 }
 function R1 () {
     info.setScore(0)
@@ -100,6 +90,19 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
     info.changeScoreBy(1)
     sprites.destroy(otherSprite)
 })
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleRedCrystal, function (sprite, location) {
+    game.splash("You passed this level!!")
+    mySprite.sayText("YAY", 500, false)
+    game.splash("Your sixth number is", _6)
+    RoomNumber6done = true
+    pause(100)
+    answer = game.askForNumber("What is the code?", 6)
+    if (answer == _1 * 100000 + (_2 * 10000 + (_3 * 1000 + (_4 * 100 + (_5 * 10 + _6 * 1))))) {
+        game.splash("You escaped!")
+    } else {
+        game.splash("Start over :(")
+    }
+})
 function R5 () {
     tiles.loadMap(tiles.createMap(tilemap`level15`))
     game.splash("You passed this level!!")
@@ -107,9 +110,9 @@ function R5 () {
     game.splash("Your fifth number is", _5)
     RoomNumber5done = true
 }
+let answer = 0
 let villain: Sprite = null
 let mySprite2: Sprite = null
-let answer = 0
 let RoomNumber6done = false
 let RoomNumber5done = false
 let RoomNumber4done = false
