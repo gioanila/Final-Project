@@ -115,6 +115,177 @@ characterAnimations.loopFrames(
 mySprite,
 [img`
     . . . . . . 5 . 5 . . . . . . . 
+    . . . . . f 5 5 5 f . . . . . . 
+    . . . . f 6 2 5 5 6 f . . . . . 
+    . . . f 6 6 6 6 1 6 6 f . . . . 
+    . . . f 6 6 6 6 6 1 6 f . . . . 
+    . . . f d f d 6 6 6 1 f . . . . 
+    . . . f d f d 6 6 6 6 f f . . . 
+    . . . f d 3 d d 6 6 6 f 6 f . . 
+    . . . . f d d d f f 6 f f . . . 
+    . . . . . f f 5 3 f 6 6 6 f . . 
+    . . . . f 5 3 3 f f f f f . . . 
+    . . . . f 3 3 f d f . . . . . . 
+    . . . . . f 3 f d f . . . . . . 
+    . . . . f 3 5 3 f d f . . . . . 
+    . . . . f f 3 3 f f . . . . . . 
+    . . . . . . f f f . . . . . . . 
+    `,img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . 5 . 5 . . . . . . 
+    . . . . . . f 5 5 5 f . . . . . 
+    . . . . . f 6 2 5 5 6 f . . . . 
+    . . . . f 6 6 6 6 1 6 6 f . . . 
+    . . . . f 6 6 6 6 6 1 6 f . . . 
+    . . . . f d f d 6 6 6 1 f . . . 
+    . . . . f d f d 6 6 6 6 f f . . 
+    . . . . f d 3 d d 6 6 6 f 6 f . 
+    . . . . . f d d d f f 6 f f . . 
+    . . . . . . f f 3 3 f f 6 6 f . 
+    . . . . . f d d d d f f f f . . 
+    . . . . . f d d d f 3 f . . . . 
+    . . . . . . f f f d 5 3 f . . . 
+    . . . . . f f f 3 3 f f . . . . 
+    . . . . . f f f f f f f . . . . 
+    `,img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . 5 . 5 . . . . . . 
+    . . . . . . f 5 5 5 f . . . . . 
+    . . . . . f 6 2 5 5 6 f . . . . 
+    . . . . f 6 6 6 6 1 6 6 f . . . 
+    . . . . f 6 6 6 6 6 1 6 f . . . 
+    . . . . f d f d 6 6 6 1 f . . . 
+    . . . . f d f d 6 6 6 6 f f . . 
+    . . . . f d 3 d d 6 6 6 f 6 f . 
+    . . . . . f d d d f f 6 f f . . 
+    . . . . . . f f 3 3 f f 6 6 f . 
+    . . . . . f 5 3 3 d d f f f . . 
+    . . . . . f 3 3 3 f d d f . . . 
+    . . . . . . f 3 5 f f f . . . . 
+    . . . . . f 3 3 3 3 f . . . . . 
+    . . . . . . f f f f f . . . . . 
+    `],
+200,
+characterAnimations.rule(Predicate.MovingLeft)
+)
+characterAnimations.loopFrames(
+mySprite,
+[img`
+    . . . . . . . 5 . 5 . . . . . . 
+    . . . . . . f 5 5 5 f . . . . . 
+    . . . . . f 6 5 5 2 6 f . . . . 
+    . . . . f 6 6 1 6 6 6 6 f . . . 
+    . . . . f 6 1 6 6 6 6 6 f . . . 
+    . . . . f 1 6 6 6 d f d f . . . 
+    . . . f f 6 6 6 6 d f d f . . . 
+    . . f 6 f 6 6 6 d d 3 d f . . . 
+    . . . f f 6 f f d d d f . . . . 
+    . . f 6 6 6 f 3 5 f f . . . . . 
+    . . . f f f f f 3 3 5 f . . . . 
+    . . . . . . f d f 3 3 f . . . . 
+    . . . . . . f d f 3 f . . . . . 
+    . . . . . f d f 3 5 3 f . . . . 
+    . . . . . . f f 3 3 f f . . . . 
+    . . . . . . . f f f . . . . . . 
+    `,img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . 5 . 5 . . . . . . . 
+    . . . . . f 5 5 5 f . . . . . . 
+    . . . . f 6 5 5 2 6 f . . . . . 
+    . . . f 6 6 1 6 6 6 6 f . . . . 
+    . . . f 6 1 6 6 6 6 6 f . . . . 
+    . . . f 1 6 6 6 d f d f . . . . 
+    . . f f 6 6 6 6 d f d f . . . . 
+    . f 6 f 6 6 6 d d 3 d f . . . . 
+    . . f f 6 f f d d d f . . . . . 
+    . f 6 6 f f 3 3 f f . . . . . . 
+    . . f f f f d d d d f . . . . . 
+    . . . . f 3 f d d d f . . . . . 
+    . . . f 3 5 d f f f . . . . . . 
+    . . . . f f 3 3 f f f . . . . . 
+    . . . . f f f f f f f . . . . . 
+    `,img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . 5 . 5 . . . . . . . 
+    . . . . . f 5 5 5 f . . . . . . 
+    . . . . f 6 5 5 2 6 f . . . . . 
+    . . . f 6 6 1 6 6 6 6 f . . . . 
+    . . . f 6 1 6 6 6 6 6 f . . . . 
+    . . . f 1 6 6 6 d f d f . . . . 
+    . . f f 6 6 6 6 d f d f . . . . 
+    . f 6 f 6 6 6 d d 3 d f . . . . 
+    . . f f 6 f f d d d f . . . . . 
+    . f 6 6 f f 3 3 f f . . . . . . 
+    . . f f f d d 3 3 5 f . . . . . 
+    . . . f d d f 3 3 3 f . . . . . 
+    . . . . f f f 5 3 f . . . . . . 
+    . . . . . f 3 3 3 3 f . . . . . 
+    . . . . . f f f f f . . . . . . 
+    `],
+200,
+characterAnimations.rule(Predicate.MovingRight)
+)
+characterAnimations.loopFrames(
+mySprite,
+[img`
+    . . . . . . . 5 5 . . . . . . . 
+    . . . . . f 5 5 5 5 f . . . . . 
+    . . . . f 6 6 6 6 6 6 f . . . . 
+    . . . f 6 1 1 1 6 1 6 6 f . . . 
+    . . . f 6 6 6 6 6 6 6 6 f . . . 
+    . . . f 6 6 6 6 6 6 6 6 f . . . 
+    . . . f 6 6 6 6 6 6 6 6 f . . . 
+    . . f f 6 6 6 6 6 6 6 6 f f . . 
+    . f 6 6 6 f 6 6 6 6 f 6 6 6 f . 
+    . . f f f 3 f f f f 3 f f f . . 
+    . . . f d 5 3 3 3 3 5 d f . . . 
+    . . f d d f 3 3 3 3 f d d f . . 
+    . . . f f f 5 3 3 5 f f f . . . 
+    . . . . f 3 3 5 5 3 3 f . . . . 
+    . . . . f 3 3 3 3 3 3 f . . . . 
+    . . . . . f f f f f f . . . . . 
+    `,img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . 5 5 . . . . . . . 
+    . . . . . f 5 5 5 5 f . . . . . 
+    . . . . f 6 6 6 6 6 6 f . . . . 
+    . . . f 6 1 1 1 6 1 6 6 f . . . 
+    . . . f 6 6 6 6 6 6 6 6 f . . . 
+    . . . f 6 6 6 6 6 6 6 6 f . . . 
+    . . . f 6 6 6 6 6 6 6 6 f . . . 
+    . . f f 6 6 6 6 6 6 6 6 f f . . 
+    . f 6 6 6 f 6 6 6 6 f 6 6 6 f . 
+    . . f f f 3 f f f f 5 f f f . . 
+    . . . f d f 3 3 3 3 d d f . . . 
+    . . . . f 3 5 3 3 f d d f . . . 
+    . . . . f 3 3 5 5 3 f f . . . . 
+    . . . . f f 3 3 f f . . . . . . 
+    . . . . . . f f . . . . . . . . 
+    `,img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . 5 5 . . . . . . . 
+    . . . . . f 5 5 5 5 f . . . . . 
+    . . . . f 6 6 6 6 6 6 f . . . . 
+    . . . f 6 1 1 1 6 1 6 6 f . . . 
+    . . . f 6 6 6 6 6 6 6 6 f . . . 
+    . . . f 6 6 6 6 6 6 6 6 f . . . 
+    . . . f 6 6 6 6 6 6 6 6 f . . . 
+    . . f f 6 6 6 6 6 6 6 6 f f . . 
+    . f 6 6 6 f 6 6 6 6 f 6 6 6 f . 
+    . . f f f 5 f f f f 3 f f f . . 
+    . . . f d d 3 3 3 3 f d f . . . 
+    . . . f d d f 3 3 5 3 f . . . . 
+    . . . . f f 3 5 5 3 3 f . . . . 
+    . . . . . . f f 3 3 f f . . . . 
+    . . . . . . . . f f . . . . . . 
+    `],
+200,
+characterAnimations.rule(Predicate.MovingUp)
+)
+characterAnimations.loopFrames(
+mySprite,
+[img`
+    . . . . . . 5 . 5 . . . . . . . 
     . . . . . f 5 5 5 f f . . . . . 
     . . . . f 1 5 2 5 1 6 f . . . . 
     . . . f 1 6 6 6 6 6 1 6 f . . . 
@@ -165,8 +336,8 @@ mySprite,
     . . . f f f f f f f f f . . . . 
     . . . . . f f . . . . . . . . . 
     `],
-500,
-characterAnimations.rule(Predicate.Moving)
+200,
+characterAnimations.rule(Predicate.MovingDown)
 )
 game.splash("Welcome to the dungeons... you have 15 minutes to leave before they implode on top of you. Find numbers by going through 6 rooms and completing the challenges, then create a code in order to escape. Best of luck!")
 pauseUntil(() => true)
