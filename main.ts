@@ -10,6 +10,7 @@ function R6 () {
 function R1 () {
     info.setScore(0)
     mySprite.sayText("Room 1... looks like I just need to collect 10 fruits.", 3000, false)
+    tiles.placeOnTile(mySprite, tiles.getTileLocation(1, 1))
     for (let index = 0; index < 10; index++) {
         mySprite2 = sprites.create(img`
             . . . . . . . 6 . . . . . . . . 
