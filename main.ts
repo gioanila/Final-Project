@@ -3,7 +3,14 @@ namespace ConnectionKind {
     export const Door4 = ConnectionKind.create()
     export const Door5 = ConnectionKind.create()
 }
-function _9 (R1: boolean) {
+function R6 () {
+    game.splash("You passed this level!!")
+    mySprite.sayText("YAY", 500, false)
+    _6 = list.indexOf(randint(0, 10))
+    game.splash("Your first number is ", _6)
+    RoomNumber6done = true
+}
+function R1 () {
     info.setScore(0)
     mySprite.sayText("Room 1... looks like I just need to collect 10 fruits.", 3000, false)
     for (let index = 0; index < 10; index++) {
@@ -31,17 +38,57 @@ function _9 (R1: boolean) {
 info.onScore(10, function () {
     game.splash("You passed this level!!")
     mySprite.sayText("YAY", 500, false)
-    room1Number = list.indexOf(randint(0, list.length))
-    game.splash("Your first number is ", room1Number)
+    _1 = list.indexOf(randint(0, 10))
+    game.splash("Your first number is ", _1)
+    RoomNumber1done = true
 })
+function R2 () {
+    game.splash("You passed this level!!")
+    mySprite.sayText("YAY", 500, false)
+    _2 = list.indexOf(randint(0, 10))
+    game.splash("Your second number is ", _2)
+    RoomNumber2done = true
+}
+function R3 () {
+    game.splash("You passed this level!!")
+    mySprite.sayText("YAY", 500, false)
+    _3 = list.indexOf(randint(0, 10))
+    game.splash("Your first number is ", _3)
+    RoomNumber3done = true
+}
+function R4 () {
+    game.splash("You passed this level!!")
+    mySprite.sayText("YAY", 500, false)
+    _4 = list.indexOf(randint(0, 10))
+    game.splash("Your first number is ", _4)
+    RoomNumber4done = true
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     info.changeScoreBy(1)
     sprites.destroy(otherSprite)
 })
-let room1Number = 0
+function R5 () {
+    game.splash("You passed this level!!")
+    mySprite.sayText("YAY", 500, false)
+    _5 = list.indexOf(randint(0, 10))
+    game.splash("Your first number is ", _5)
+    RoomNumber5done = true
+}
 let mySprite2: Sprite = null
+let RoomNumber6done = false
+let RoomNumber5done = false
+let RoomNumber4done = false
+let RoomNumber3done = false
 let list: number[] = []
+let RoomNumber2done = false
+let RoomNumber1done = false
 let mySprite: Sprite = null
+let _6 = 0
+let _5 = 0
+let _4 = 0
+let _3 = 0
+let _2 = 0
+let _1 = 0
 mySprite = sprites.create(img`
     . . . . . . 5 . 5 . . . . . . . 
     . . . . . f 5 5 5 f f . . . . . 
@@ -123,7 +170,8 @@ characterAnimations.rule(Predicate.Moving)
 game.splash("Welcome to the dungeons... you have 15 minutes to leave before they implode on top of you. Find numbers by going through 6 rooms and completing the challenges, then create a code in order to escape. Best of luck!")
 pauseUntil(() => true)
 info.startCountdown(900)
-_9(true)
+RoomNumber1done = false
+RoomNumber2done = false
 let room1 = tiles.createMap(tilemap`level6`)
 let room2 = tiles.createMap(tilemap`level2`)
 let room3 = tiles.createMap(tilemap`level8`)
@@ -147,3 +195,18 @@ list = [
 8,
 9
 ]
+if (RoomNumber1done == false) {
+    R1()
+} else if (RoomNumber2done == false) {
+    R2()
+} else if (RoomNumber3done == false) {
+    R3()
+} else if (RoomNumber4done == false) {
+    R4()
+} else if (RoomNumber5done == false) {
+    R5()
+} else if (RoomNumber6done == false) {
+    R6()
+} else {
+    game.splash("What is the code?" + game.askForNumber("" + _1 + _2 + _3 + _4 + _5 + _6))
+}
