@@ -31,13 +31,15 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite, oth
     sprites.destroy(sprite)
     game.splash("You passed this level!!")
     mySprite.sayText("YAY", 500, false)
+    pause(1000)
     game.splash("Your second number is", _2)
     RoomNumber2done = true
+    R3()
 })
 function R1 () {
     info.setScore(0)
-    mySprite.sayText("Room 1... looks like I just need to collect 10 fruits.", 3000, false)
-    tiles.placeOnTile(mySprite, tiles.getTileLocation(1, 1))
+    mySprite.sayText("Room 1... looks like I just need to collect 10 fruits.", 5000, false)
+    tiles.placeOnTile(mySprite, tiles.getTileLocation(8, 8))
     for (let index = 0; index < 10; index++) {
         mySprite2 = sprites.create(img`
             . . . . . . . 6 . . . . . . . . 
@@ -65,10 +67,12 @@ info.onScore(10, function () {
     mySprite.sayText("YAY", 500, false)
     game.splash("Your first number is ", _1)
     RoomNumber1done = true
+    R2()
 })
 function R2 () {
     tiles.placeOnTile(mySprite, tiles.getTileLocation(8, 8))
     tiles.loadMap(tiles.createMap(tilemap`level2`))
+    mySprite.sayText("Room 2... I need to find the enemy and beat them with the A button.")
     villain = sprites.create(img`
         ........................
         ........................
@@ -100,10 +104,29 @@ function R2 () {
 }
 function R3 () {
     tiles.loadMap(tiles.createMap(tilemap`level8`))
-    game.splash("You passed this level!!")
-    mySprite.sayText("YAY", 500, false)
-    game.splash("Your third number is ", _3)
-    RoomNumber3done = true
+    Math1 = game.askForNumber("What is 52+15+19", 2)
+    if (Math1 == 86) {
+        Math2 = game.askForNumber("What is " + "89-7+7", 2)
+        if (Math2 == 89) {
+            Math3 = game.askForNumber("What is " + "57+5-6", 2)
+            if (Math3 == 56) {
+                game.splash("You passed this level!!")
+                mySprite.sayText("YAY", 500, false)
+                game.splash("Your third number is ", _3)
+                RoomNumber3done = true
+                R4()
+            } else {
+                mySprite.sayText("WRONG! YOU DIED IN THE DUNGEONS")
+                music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.UntilDone)
+            }
+        } else {
+            mySprite.sayText("WRONG! YOU DIED IN THE DUNGEONS")
+            music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.UntilDone)
+        }
+    } else {
+        mySprite.sayText("WRONG! YOU DIED IN THE DUNGEONS")
+        music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.UntilDone)
+    }
 }
 function R4 () {
     tiles.loadMap(tiles.createMap(tilemap`level13`))
@@ -111,6 +134,7 @@ function R4 () {
     mySprite.sayText("YAY", 500, false)
     game.splash("Your fourth number is", _4)
     RoomNumber4done = true
+    R5()
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     info.changeScoreBy(1)
@@ -135,8 +159,12 @@ function R5 () {
     mySprite.sayText("YAY", 500, false)
     game.splash("Your fifth number is", _5)
     RoomNumber5done = true
+    R6()
 }
 let answer = 0
+let Math3 = 0
+let Math2 = 0
+let Math1 = 0
 let villain: Sprite = null
 let mySprite2: Sprite = null
 let projectile: Sprite = null
@@ -442,21 +470,6 @@ _5 = list[randint(0, 10)]
 _6 = list[randint(0, 10)]
 if (RoomNumber1done == false) {
     R1()
-    if (RoomNumber2done == false) {
-        R2()
-        if (RoomNumber3done == false) {
-            R3()
-            if (RoomNumber4done == false) {
-                R4()
-                if (RoomNumber5done == false) {
-                    R5()
-                    if (RoomNumber6done == false) {
-                        R6()
-                    }
-                }
-            }
-        }
-    }
 }
 while (characterAnimations.matchesRule(mySprite, characterAnimations.rule(Predicate.Moving, Predicate.NotMoving))) {
     music.play(music.createSong(hex`0078000408030300001c00010a006400f401640000040000000000000000000000000005000004120008000c00012010001400012718001c00011d07001c00020a006400f401640000040000000000000000000000000000000003260000000400011e0c001000031d24291400180001241c002000012730003400012538003c00012409010e02026400000403780000040a000301000000640001c80000040100000000640001640000040100000000fa0004af00000401c80000040a00019600000414000501006400140005010000002c0104dc00000401fa0000040a0001c8000004140005d0076400140005d0070000c800029001f40105c201f4010a0005900114001400039001000005c201f4010500058403050032000584030000fa00049001000005c201f4010500058403c80032000584030500640005840300009001049001000005c201f4010500058403c80064000584030500c8000584030000f40105ac0d000404a00f00000a0004ac0d2003010004a00f0000280004ac0d9001010004a00f0000280002d00700040408070f0064000408070000c80003c800c8000e7d00c80019000e64000f0032000e78000000fa00032c01c8000ee100c80019000ec8000f0032000edc000000fa0003f401c8000ea901c80019000e90010f0032000ea4010000fa0001c8000004014b000000c800012c01000401c8000000c8000190010004012c010000c80002c800000404c8000f0064000496000000c80002c2010004045e010f006400042c010000640002c409000404c4096400960004f6090000f40102b80b000404b80b64002c0104f40b0000f401022003000004200300040a000420030000ea01029001000004900100040a000490010000900102d007000410d0076400960010d0070000c8001800100011000105240025000105280029000107380039000102`), music.PlaybackMode.UntilDone)
