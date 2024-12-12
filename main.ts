@@ -36,6 +36,11 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite, oth
     RoomNumber2done = true
     R3()
 })
+info.onCountdownEnd(function () {
+    scene.cameraShake(10, 5000)
+    mySprite.sayText("YOU DIED")
+    game.gameOver(false)
+})
 function R1 () {
     info.setScore(0)
     mySprite.sayText("Room 1... looks like I just need to collect 10 fruits.", 5000, false)
