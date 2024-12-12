@@ -90,6 +90,9 @@ let _4 = 0
 let _3 = 0
 let _2 = 0
 let _1 = 0
+while (false) {
+    music.play(music.createSong(hex`0078000408020107001c00020a006400f401640000040000000000000000000000000000000003260000000400011e0c001000031d24291400180001241c002000012730003400012538003c000124`), music.PlaybackMode.UntilDone)
+}
 mySprite = sprites.create(img`
     . . . . . . 5 . 5 . . . . . . . 
     . . . . . f 5 5 5 f f . . . . . 
