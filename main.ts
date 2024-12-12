@@ -6,8 +6,7 @@ namespace ConnectionKind {
 function R6 () {
     game.splash("You passed this level!!")
     mySprite.sayText("YAY", 500, false)
-    _6 = list.indexOf(randint(0, 10))
-    game.splash("Your sixth number is ", _6)
+    game.splash("Your sixth number is", _6)
     RoomNumber6done = true
     answer = game.askForNumber("What is the code?", 6)
     if (answer == _1 * 100000 + (_2 * 10000 + (_3 * 1000 + (_4 * 100 + (_5 * 10 + _6 * 1))))) {
@@ -44,7 +43,6 @@ function R1 () {
 info.onScore(10, function () {
     game.splash("You passed this level!!")
     mySprite.sayText("YAY", 500, false)
-    _1 = list.indexOf(randint(0, 10))
     game.splash("Your first number is ", _1)
     RoomNumber1done = true
 })
@@ -52,22 +50,19 @@ function R2 () {
     tiles.loadMap(tiles.createMap(tilemap`level2`))
     game.splash("You passed this level!!")
     mySprite.sayText("YAY", 500, false)
-    _2 = list.indexOf(randint(0, 10))
-    game.splash("Your second number is ", _2)
+    game.splash("Your second number is", _2)
     RoomNumber2done = true
 }
 function R3 () {
     game.splash("You passed this level!!")
     mySprite.sayText("YAY", 500, false)
-    _3 = list.indexOf(randint(0, 10))
     game.splash("Your third number is ", _3)
     RoomNumber3done = true
 }
 function R4 () {
     game.splash("You passed this level!!")
     mySprite.sayText("YAY", 500, false)
-    _4 = list.indexOf(randint(0, 10))
-    game.splash("Your fourth number is ", _4)
+    game.splash("Your fourth number is", _4)
     RoomNumber4done = true
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
@@ -77,13 +72,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
 function R5 () {
     game.splash("You passed this level!!")
     mySprite.sayText("YAY", 500, false)
-    _5 = list.indexOf(randint(0, 10))
-    game.splash("Your fifth number is ", _5)
+    game.splash("Your fifth number is", _5)
     RoomNumber5done = true
 }
 let mySprite2: Sprite = null
 let answer = 0
-let list: number[] = []
 let RoomNumber6done = false
 let RoomNumber5done = false
 let RoomNumber4done = false
@@ -195,7 +188,7 @@ tiles.connectMapById(room2, room3, ConnectionKind.Door2)
 tiles.connectMapById(room3, room4, ConnectionKind.Door3)
 tiles.connectMapById(room3, room4, ConnectionKind.Door4)
 tiles.connectMapById(room5, room6, ConnectionKind.Door5)
-list = [
+let list = [
 0,
 1,
 2,
@@ -207,6 +200,12 @@ list = [
 8,
 9
 ]
+_1 = list[randint(0, 10)]
+_2 = list[randint(0, 10)]
+_3 = list[randint(0, 10)]
+_4 = list[randint(0, 10)]
+_5 = list[randint(0, 10)]
+_6 = list[randint(0, 10)]
 if (RoomNumber1done == false) {
     R1()
     if (RoomNumber2done == false) {
