@@ -5,6 +5,7 @@ namespace ConnectionKind {
 }
 function R6 () {
     tiles.loadMap(tiles.createMap(tilemap`level17`))
+    mySprite.setPosition(20, 20)
     game.splash("You passed this level!!")
     mySprite.sayText("YAY", 500, false)
     game.splash("Your sixth number is", _6)
