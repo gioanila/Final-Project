@@ -9,6 +9,12 @@ function R6 () {
     _6 = list.indexOf(randint(0, 10))
     game.splash("Your first number is ", _6)
     RoomNumber6done = true
+    answer = game.askForNumber("What is the code?", 6)
+    if (answer == _1 * 100000 + (_2 * 10000 + (_3 * 1000 + (_4 * 100 + (_5 * 10 + _6 * 1))))) {
+        game.splash("You escaped!")
+    } else {
+        game.splash("Start over :(")
+    }
 }
 function R1 () {
     info.setScore(0)
@@ -43,6 +49,7 @@ info.onScore(10, function () {
     RoomNumber1done = true
 })
 function R2 () {
+    tiles.loadMap(tiles.createMap(tilemap`level2`))
     game.splash("You passed this level!!")
     mySprite.sayText("YAY", 500, false)
     _2 = list.indexOf(randint(0, 10))
@@ -76,11 +83,11 @@ function R5 () {
 }
 let mySprite2: Sprite = null
 let answer = 0
+let list: number[] = []
 let RoomNumber6done = false
 let RoomNumber5done = false
 let RoomNumber4done = false
 let RoomNumber3done = false
-let list: number[] = []
 let RoomNumber2done = false
 let RoomNumber1done = false
 let mySprite: Sprite = null
@@ -173,6 +180,10 @@ pauseUntil(() => true)
 info.startCountdown(900)
 RoomNumber1done = false
 RoomNumber2done = false
+RoomNumber3done = false
+RoomNumber4done = false
+RoomNumber5done = false
+RoomNumber6done = false
 let room1 = tiles.createMap(tilemap`level6`)
 let room2 = tiles.createMap(tilemap`level2`)
 let room3 = tiles.createMap(tilemap`level8`)
@@ -198,19 +209,19 @@ list = [
 ]
 if (RoomNumber1done == false) {
     R1()
-} else if (RoomNumber2done == false) {
-    R2()
-} else if (RoomNumber3done == false) {
-    R3()
-} else if (RoomNumber4done == false) {
-    R4()
-} else if (RoomNumber5done == false) {
-    R5()
-} else if (RoomNumber6done == false) {
-    R6()
-} else {
-    answer = game.askForNumber("What is the code?")
-    if (answer == _1 * 100000 + (_2 * 10000 + (_3 * 1000 + (_4 * 100 + (_5 * 10 + _6 * 1))))) {
-        game.splash("You escaped!")
+    if (RoomNumber2done == false) {
+        R2()
+        if (RoomNumber3done == false) {
+            R3()
+            if (RoomNumber4done == false) {
+                R4()
+                if (RoomNumber5done == false) {
+                    R5()
+                    if (RoomNumber6done == false) {
+                        R6()
+                    }
+                }
+            }
+        }
     }
 }
