@@ -109,7 +109,7 @@ mySprite = sprites.create(img`
     . . . . . f f . . f f . . . . . 
     `, SpriteKind.Player)
 tiles.loadMap(tiles.createMap(tilemap`level6`))
-controller.moveSprite(mySprite)
+controller.moveSprite(mySprite, 200, 200)
 scene.cameraFollowSprite(mySprite)
 characterAnimations.loopFrames(
 mySprite,
