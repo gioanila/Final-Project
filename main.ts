@@ -75,6 +75,7 @@ function R5 () {
     RoomNumber5done = true
 }
 let mySprite2: Sprite = null
+let answer = 0
 let RoomNumber6done = false
 let RoomNumber5done = false
 let RoomNumber4done = false
@@ -208,5 +209,8 @@ if (RoomNumber1done == false) {
 } else if (RoomNumber6done == false) {
     R6()
 } else {
-    game.splash("What is the code?" + game.askForNumber("" + _1 + _2 + _3 + _4 + _5 + _6))
+    answer = game.askForNumber("What is the code?")
+    if (answer == _1 * 100000 + (_2 * 10000 + (_3 * 1000 + (_4 * 100 + (_5 * 10 + _6 * 1))))) {
+    	
+    }
 }
