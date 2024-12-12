@@ -3,15 +3,7 @@ namespace ConnectionKind {
     export const Door4 = ConnectionKind.create()
     export const Door5 = ConnectionKind.create()
 }
-info.onScore(10, function () {
-    game.splash("You passed this level!!")
-    mySprite.sayText("YAY")
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
-    info.changeScoreBy(1)
-    sprites.destroy(otherSprite)
-})
-function _1 (R1: boolean) {
+function _9 (R1: boolean) {
     info.setScore(0)
     mySprite.sayText("Room 1... looks like I just need to collect 10 fruits.", 3000, false)
     for (let index = 0; index < 10; index++) {
@@ -36,7 +28,19 @@ function _1 (R1: boolean) {
         mySprite2.setPosition(randint(20, 200), randint(20, 200))
     }
 }
+info.onScore(10, function () {
+    game.splash("You passed this level!!")
+    mySprite.sayText("YAY", 500, false)
+    room1Number = list.indexOf(randint(0, list.length))
+    game.splash("Your first number is ", room1Number)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
+    info.changeScoreBy(1)
+    sprites.destroy(otherSprite)
+})
+let room1Number = 0
 let mySprite2: Sprite = null
+let list: number[] = []
 let mySprite: Sprite = null
 mySprite = sprites.create(img`
     . . . . . . 5 . 5 . . . . . . . 
@@ -116,10 +120,10 @@ mySprite,
 500,
 characterAnimations.rule(Predicate.Moving)
 )
-game.splash("Welcome to the dungeons... you have 15 minutes to leave before they implode on top of you. Find letters by going through 6 rooms and completing the challenges, then create a code in order to escape. Best of luck!")
+game.splash("Welcome to the dungeons... you have 15 minutes to leave before they implode on top of you. Find numbers by going through 6 rooms and completing the challenges, then create a code in order to escape. Best of luck!")
 pauseUntil(() => true)
 info.startCountdown(900)
-_1(true)
+_9(true)
 let room1 = tiles.createMap(tilemap`level6`)
 let room2 = tiles.createMap(tilemap`level2`)
 let room3 = tiles.createMap(tilemap`level8`)
@@ -131,3 +135,15 @@ tiles.connectMapById(room2, room3, ConnectionKind.Door2)
 tiles.connectMapById(room3, room4, ConnectionKind.Door3)
 tiles.connectMapById(room3, room4, ConnectionKind.Door4)
 tiles.connectMapById(room5, room6, ConnectionKind.Door5)
+list = [
+0,
+1,
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+9
+]
