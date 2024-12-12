@@ -4,6 +4,7 @@ namespace ConnectionKind {
     export const Door5 = ConnectionKind.create()
 }
 function R6 () {
+    tiles.loadMap(tiles.createMap(tilemap`level17`))
     game.splash("You passed this level!!")
     mySprite.sayText("YAY", 500, false)
     game.splash("Your sixth number is", _6)
@@ -81,12 +82,14 @@ function R2 () {
     RoomNumber2done = true
 }
 function R3 () {
+    tiles.loadMap(tiles.createMap(tilemap`level8`))
     game.splash("You passed this level!!")
     mySprite.sayText("YAY", 500, false)
     game.splash("Your third number is ", _3)
     RoomNumber3done = true
 }
 function R4 () {
+    tiles.loadMap(tiles.createMap(tilemap`level13`))
     game.splash("You passed this level!!")
     mySprite.sayText("YAY", 500, false)
     game.splash("Your fourth number is", _4)
@@ -97,6 +100,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
     sprites.destroy(otherSprite)
 })
 function R5 () {
+    tiles.loadMap(tiles.createMap(tilemap`level15`))
     game.splash("You passed this level!!")
     mySprite.sayText("YAY", 500, false)
     game.splash("Your fifth number is", _5)
