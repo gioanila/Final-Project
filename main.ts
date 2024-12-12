@@ -211,6 +211,6 @@ if (RoomNumber1done == false) {
 } else {
     answer = game.askForNumber("What is the code?")
     if (answer == _1 * 100000 + (_2 * 10000 + (_3 * 1000 + (_4 * 100 + (_5 * 10 + _6 * 1))))) {
-    	
+        game.splash("You escaped!")
     }
 }
