@@ -126,11 +126,15 @@ function R3 () {
             ofquestions += -1
             game.splash("Congrats!" + ofquestions + "  questions more to go!")
             if (ofquestions == 0) {
-                game.splash("You passed this level!!")
-                mySprite.sayText("YAY", 500, false)
-                game.splash("Your third number is ", _3)
-                RoomNumber3done = true
-                R4()
+                game.splash("Now...riddle me this...")
+                riddle = game.askForString("What word is spelled wrong in the dictionary? ")
+                if (riddle == "wrong") {
+                    game.splash("You passed this level!!")
+                    mySprite.sayText("YAY", 500, false)
+                    game.splash("Your third number is ", _3)
+                    RoomNumber3done = true
+                    R4()
+                }
             }
         } else {
             ofquestions = 0
@@ -181,6 +185,7 @@ function R5 () {
     R6()
 }
 let answer = 0
+let riddle = ""
 let userinput = 0
 let mathanswer = 0
 let value3 = 0
