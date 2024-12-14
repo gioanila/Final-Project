@@ -228,7 +228,7 @@ function R3 () {
             game.splash("Congrats!" + ofquestions + " questions more to go!")
             if (ofquestions == 0) {
                 game.splash("You're a math genius! But now...")
-                game.splash("iddle me this...")
+                game.splash("Riddle me this...")
                 riddle = game.askForString("What word is spelled wrong in the dictionary? ")
                 if (riddle == "wrong") {
                     game.splash("You passed this level!!")
