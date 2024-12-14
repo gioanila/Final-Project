@@ -3,6 +3,9 @@ enum ActionKind {
     Idle,
     Jumping
 }
+namespace SpriteKind {
+    export const trap = SpriteKind.create()
+}
 namespace ConnectionKind {
     export const Door3 = ConnectionKind.create()
     export const Door4 = ConnectionKind.create()
@@ -11,6 +14,11 @@ namespace ConnectionKind {
 function R6 () {
     tiles.loadMap(tiles.createMap(tilemap`level17`))
     tiles.placeOnTile(mySprite, tiles.getTileLocation(1, 1))
+}
+function trap2 (trapsprite: Sprite) {
+    trapsprite.setPosition(randint(20, 200), randint(20, 200))
+    trapsprite.setVelocity(100, 0)
+    trapsprite.setBounceOnWall(true)
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     projectile = sprites.createProjectileFromSprite(img`
@@ -47,9 +55,72 @@ info.onCountdownEnd(function () {
     game.gameOver(false)
 })
 function R1 () {
+    info.setLife(3)
     info.setScore(0)
-    mySprite.sayText("Room 1... looks like I just need to collect 10 fruits.", 5000, false)
-    tiles.placeOnTile(mySprite, tiles.getTileLocation(8, 8))
+    mySprite.sayText("Room 1... looks like I just need to collect 10 fruits while avoiding the traps.", 5000, false)
+    tiles.placeOnTile(mySprite, tiles.getTileLocation(9, 8))
+    trapr1 = sprites.create(img`
+        ........................
+        ........................
+        ........................
+        ...........ccc..........
+        ...........cccc.........
+        .......ccc..ccccccc.....
+        .......cccccc555555cc...
+        ........ccb5555555555c..
+        .....cc..b555555555555c.
+        .....cccb55555bcc555555c
+        ......cb555555555c55d55c
+        ......b5555555555555555c
+        ...cc.b555dd5555bb1bbbc.
+        ....ccd55ddddd5bbbb335c.
+        ...ccbdddddddd5bbbb335c.
+        .ccccddddddddd55bbb335c.
+        cdcccdddddb55bb5bb3335c.
+        cddbddddddb555bb5b3335c.
+        cddddddddddb5555b53335c.
+        ccddddddbd55bb55c5555c..
+        .ccddddbbbdd55cccbccc...
+        ...ccbbbcbddddccdddc....
+        .....ccccdd555dccccc....
+        ........cccccccc........
+        `, SpriteKind.trap)
+    trap2r1 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . c c . c c . . . . . . . . 
+        . . f 3 c c 3 c c c . . . . . . 
+        . f c 3 b c 3 b c c c . . . . . 
+        f c b b b b b b b b f f . . . . 
+        c c 1 b b b 1 b b b f f . . . . 
+        c b b b b b b b b c f f f . . . 
+        c b 1 f f 1 c b b f f f f . . . 
+        f f 1 f f 1 f b c c b b b . . . 
+        f f f f f f f b f c c c c . . . 
+        f f 2 2 2 2 f b f b b c c c . . 
+        . f 2 2 2 2 2 b c c b b c . . . 
+        . . f 2 2 2 b f f c c b b c . . 
+        . . . f f f f f f f c c c c c . 
+        . . . . . . . . . . . . c c c c 
+        `, SpriteKind.trap)
+    trap3r1 = sprites.create(img`
+        ...........fffffff...ccfff..........
+        ..........fbbbbbbbffcbbbbf..........
+        ..........fbb111bbbbbffbf...........
+        ..........fb11111ffbbbbff...........
+        ..........f1cccc1ffbbbbbcff.........
+        ..........ffc1c1c1bbcbcbcccf........
+        ...........fcc3331bbbcbcbcccf..ccccc
+        ............c333c1bbbcbcbccccfcddbbc
+        ............c333c1bbbbbbbcccccddbcc.
+        ............c333c11bbbbbccccccbbcc..
+        ...........cc331c11bbbbccccccfbccf..
+        ...........cc13c11cbbbcccccbbcfccf..
+        ...........c111111cbbbfdddddc.fbbcf.
+        ............cc1111fbdbbfdddc...fbbf.
+        ..............cccfffbdbbfcc.....fbbf
+        ....................fffff........fff
+        `, SpriteKind.trap)
     for (let index = 0; index < 10; index++) {
         mySprite2 = sprites.create(img`
             . . . . . . . 6 . . . . . . . . 
@@ -71,6 +142,9 @@ function R1 () {
             `, SpriteKind.Food)
         mySprite2.setPosition(randint(20, 200), randint(20, 200))
     }
+    trap2(trap2r1)
+    trap2(trapr1)
+    trap2(trap3r1)
 }
 info.onScore(10, function () {
     game.splash("You passed this level!!")
@@ -112,6 +186,12 @@ function R2 () {
     villain.follow(mySprite, 30)
     tiles.placeOnTile(villain, tiles.getTileLocation(randint(0, tiles.tileWidth()), 0))
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.trap, function (sprite, otherSprite) {
+    info.changeLifeBy(-1)
+    sprites.destroy(otherSprite)
+    mySprite.sayText("OW!", 200, false)
+    music.play(music.melodyPlayable(music.smallCrash), music.PlaybackMode.UntilDone)
+})
 function R3 () {
     tiles.loadMap(tiles.createMap(tilemap`level8`))
     mySprite.sayText("Room 3... I need to get 3 math questions and a riddle right to get the key...", 5000, false)
@@ -127,7 +207,7 @@ function R3 () {
             game.splash("Congrats!" + ofquestions + " questions more to go!")
             if (ofquestions == 0) {
                 game.splash("You're a math genius! But now...")
-                game.splash("Riddle me this...")
+                game.splash("iddle me this...")
                 riddle = game.askForString("What word is spelled wrong in the dictionary? ")
                 if (riddle == "wrong") {
                     game.splash("You passed this level!!")
@@ -154,6 +234,11 @@ function R3 () {
 function answerChecker (correctAnswer: number) {
     return correctAnswer
 }
+info.onLifeZero(function () {
+    scene.cameraShake(10, 5000)
+    mySprite.sayText("YOU DIED")
+    game.gameOver(false)
+})
 function R4 () {
     tiles.loadMap(tiles.createMap(tilemap`level13`))
     game.splash("You passed this level!!")
@@ -178,7 +263,6 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleRedCrystal, fu
         game.gameOver(true)
     } else {
         game.splash("Start over :(")
-        game.gameOver(false)
         R1()
     }
 })
@@ -200,6 +284,9 @@ let value1 = 0
 let ofquestions = 0
 let villain: Sprite = null
 let mySprite2: Sprite = null
+let trap3r1: Sprite = null
+let trap2r1: Sprite = null
+let trapr1: Sprite = null
 let projectile: Sprite = null
 let RoomNumber6done = false
 let RoomNumber5done = false
@@ -233,7 +320,7 @@ mySprite = sprites.create(img`
     . . . . . f f . . f f . . . . . 
     `, SpriteKind.Player)
 tiles.loadMap(tiles.createMap(tilemap`level6`))
-controller.moveSprite(mySprite)
+controller.moveSprite(mySprite, 80, 80)
 scene.cameraFollowSprite(mySprite)
 characterAnimations.loopFrames(
 mySprite,
