@@ -124,9 +124,10 @@ function R3 () {
         userinput = game.askForNumber("What is " + value1 + "x" + value2 + "+" + value3, 6)
         if (mathanswer == userinput) {
             ofquestions += -1
-            game.splash("Congrats!" + ofquestions + "  questions more to go!")
+            game.splash("Congrats!" + ofquestions + " questions more to go!")
             if (ofquestions == 0) {
-                game.splash("Now...riddle me this...")
+                game.splash("You're a math genius! But now...")
+                game.splash("Riddle me this...")
                 riddle = game.askForString("What word is spelled wrong in the dictionary? ")
                 if (riddle == "wrong") {
                     game.splash("You passed this level!!")
@@ -134,6 +135,11 @@ function R3 () {
                     game.splash("Your third number is ", _3)
                     RoomNumber3done = true
                     R4()
+                } else {
+                    game.splash("WRONG!" + "It's  " + answerChecker(mathanswer))
+                    game.splash("YOU DIED! Restart from room 1.")
+                    music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.UntilDone)
+                    R1()
                 }
             }
         } else {
