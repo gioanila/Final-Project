@@ -1,3 +1,8 @@
+enum ActionKind {
+    Walking,
+    Idle,
+    Jumping
+}
 namespace ConnectionKind {
     export const Door3 = ConnectionKind.create()
     export const Door4 = ConnectionKind.create()
@@ -109,32 +114,35 @@ function R2 () {
 }
 function R3 () {
     tiles.loadMap(tiles.createMap(tilemap`level8`))
-    Math1 = game.askForNumber("What is 52+15+19", 2)
-    if (Math1 == 86) {
-        Math2 = game.askForNumber("What is " + "89-7+7", 2)
-        if (Math2 == 89) {
-            Math3 = game.askForNumber("What is " + "57+5-6", 2)
-            if (Math3 == 56) {
+    mySprite.sayText("Room 3... I need to get 3 math questions and a riddle right to get the key...", 5000, false)
+    ofquestions = 3
+    while (0 < ofquestions) {
+        value1 = randint(35, 350)
+        value2 = randint(-4, -46)
+        value3 = randint(583, 234)
+        mathanswer = value1 * value2 + value3
+        userinput = game.askForNumber("What is " + value1 + "x" + value2 + "+" + value3, 6)
+        if (mathanswer == userinput) {
+            ofquestions += -1
+            game.splash("Congrats!" + ofquestions + "  questions more to go!")
+            if (ofquestions == 0) {
                 game.splash("You passed this level!!")
                 mySprite.sayText("YAY", 500, false)
                 game.splash("Your third number is ", _3)
                 RoomNumber3done = true
                 R4()
-            } else {
-                mySprite.sayText("WRONG! YOU DIED IN THE DUNGEONS")
-                music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.UntilDone)
-                R1()
             }
         } else {
-            mySprite.sayText("WRONG! YOU DIED IN THE DUNGEONS")
+            ofquestions = 0
+            game.splash("WRONG!" + "It's  " + answerChecker(mathanswer))
+            game.splash("YOU DIED! Restart from room 1.")
             music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.UntilDone)
+            R1()
         }
-        R1()
-    } else {
-        mySprite.sayText("WRONG! YOU DIED IN THE DUNGEONS")
-        music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.UntilDone)
-        R1()
     }
+}
+function answerChecker (correctAnswer: number) {
+    return correctAnswer
 }
 function R4 () {
     tiles.loadMap(tiles.createMap(tilemap`level13`))
@@ -173,9 +181,12 @@ function R5 () {
     R6()
 }
 let answer = 0
-let Math3 = 0
-let Math2 = 0
-let Math1 = 0
+let userinput = 0
+let mathanswer = 0
+let value3 = 0
+let value2 = 0
+let value1 = 0
+let ofquestions = 0
 let villain: Sprite = null
 let mySprite2: Sprite = null
 let projectile: Sprite = null
