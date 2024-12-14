@@ -5,6 +5,8 @@ enum ActionKind {
 }
 namespace SpriteKind {
     export const trap = SpriteKind.create()
+    export const dart = SpriteKind.create()
+    export const goal = SpriteKind.create()
 }
 namespace ConnectionKind {
     export const Door3 = ConnectionKind.create()
@@ -15,39 +17,25 @@ function R6 () {
     tiles.loadMap(tiles.createMap(tilemap`level17`))
     tiles.placeOnTile(mySprite, tiles.getTileLocation(1, 1))
 }
+sprites.onOverlap(SpriteKind.dart, SpriteKind.goal, function (sprite, otherSprite) {
+    game.splash("Goal!")
+    sprites.destroy(myDart)
+    pause(1000)
+    game.splash("You passed this level!!")
+    mySprite.sayText("YAY", 500, false)
+    pause(1000)
+    game.splash("Your second number is", _2)
+    RoomNumber2done = true
+    music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
+    R3()
+})
 function trap2 (trapsprite: Sprite) {
     trapsprite.setPosition(randint(20, 200), randint(20, 200))
     trapsprite.setVelocity(100, 0)
     trapsprite.setBounceOnWall(true)
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    projectile = sprites.createProjectileFromSprite(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . f f f . . . . . . . 
-        . . . . . . f f f . . . . . . . 
-        . . . . . . f f f . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, mySprite, randint(-100, 100), randint(-100, 100))
-})
-sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite, otherSprite) {
-    sprites.destroy(sprite)
-    game.splash("You passed this level!!")
-    mySprite.sayText("YAY", 500, false)
-    pause(1000)
-    game.splash("Your second number is", _2)
-    RoomNumber2done = true
-    R3()
+    myDart.throwDart()
 })
 info.onCountdownEnd(function () {
     scene.cameraShake(10, 5000)
@@ -57,7 +45,8 @@ info.onCountdownEnd(function () {
 function R1 () {
     info.setLife(3)
     info.setScore(0)
-    mySprite.sayText("Room 1... looks like I just need to collect 10 fruits while avoiding the traps.", 5000, false)
+    mySprite.sayText("Room 1... looks like I just need to collect 10 fruits while avoiding the traps.", 2000, false)
+    pause(2000)
     tiles.placeOnTile(mySprite, tiles.getTileLocation(9, 8))
     trapr1 = sprites.create(img`
         ........................
@@ -147,6 +136,7 @@ function R1 () {
     trap2(trap3r1)
 }
 info.onScore(10, function () {
+    sprites.destroy(mySprite2)
     game.splash("You passed this level!!")
     mySprite.sayText("YAY", 500, false)
     game.splash("Your first number is ", _1)
@@ -156,39 +146,48 @@ info.onScore(10, function () {
 })
 function R2 () {
     sprites.destroyAllSpritesOfKind(SpriteKind.trap)
-    tiles.placeOnTile(mySprite, tiles.getTileLocation(8, 8))
     tiles.loadMap(tiles.createMap(tilemap`level2`))
-    mySprite.sayText("Room 2... I need to fight and beat the enemy with the A button... But also be careful to not step on the lava.", 2000, false)
-    mySprite.sayText("I see... The water can give me a boost in HP.")
-    pause(1000)
-    villain = sprites.create(img`
-        ........................
-        ........................
-        ........................
-        ........................
-        ........................
-        ..........ffff..........
-        ........ff1111ff........
-        .......fb111111bf.......
-        .......f11111111f.......
-        ......fd11111111df......
-        ....7.fd11111111df......
-        ...7..fd11111111df......
-        ...7..fd11111111df......
-        ...7..fddd1111dddff.....
-        ...77.fbdbfddfbdbfcf....
-        ...777fcdcf11fcdcfbf....
-        ....77fffbdb1bdffcf.....
-        ....fcb1bcffffff........
-        ....f1c1c1ffffff........
-        ....fdfdfdfffff.........
-        .....f.f.f..............
-        ........................
-        ........................
-        ........................
-        `, SpriteKind.Enemy)
-    villain.follow(mySprite, 30)
-    tiles.placeOnTile(villain, tiles.getTileLocation(randint(0, tiles.tileWidth()), 0))
+    game.splash("Shoot your dart towards the chest to open the next number!")
+    myDart = darts.create(img`
+        . . . . . . 3 3 . . . . . . . . 
+        . . . . . . 3 1 3 . . . . . . . 
+        . . 3 3 . . 3 1 3 . . 3 3 . . . 
+        . . 3 1 3 . 3 1 3 2 3 1 3 . . . 
+        . . . 3 1 3 3 1 3 2 1 3 . . . . 
+        3 3 3 3 2 1 3 1 1 1 3 . . . . . 
+        3 1 1 1 1 1 1 1 1 2 3 3 3 3 3 3 
+        . 3 3 3 2 3 1 1 1 1 1 1 1 1 1 3 
+        . . . . . 2 1 1 1 3 3 2 3 3 3 . 
+        . . . . 3 1 3 1 3 1 2 . . . . . 
+        . . . 3 1 3 2 1 3 3 1 3 . . . . 
+        . . 3 1 3 . 2 1 3 . 3 1 3 . . . 
+        . . 3 3 . . 3 1 3 . . 3 3 . . . 
+        . . . . . . 3 1 3 . . . . . . . 
+        . . . . . . 3 1 3 . . . . . . . 
+        . . . . . . 3 3 . . . . . . . . 
+        `, SpriteKind.dart)
+    myDart.setTrace()
+    myDart.controlWithArrowKeys()
+    chest = sprites.create(img`
+        . . b b b b b b b b b b b b . . 
+        . b e 4 4 4 4 4 4 4 4 4 4 e b . 
+        b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
+        b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
+        b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
+        b e e 4 4 4 4 4 4 4 4 4 4 e e b 
+        b e e e e e e e e e e e e e e b 
+        b e e e e e e e e e e e e e e b 
+        b b b b b b b d d b b b b b b b 
+        c b b b b b b c c b b b b b b c 
+        c c c c c c b c c b c c c c c c 
+        b e e e e e c b b c e e e e e b 
+        b e e e e e e e e e e e e e e b 
+        b c e e e e e e e e e e e e c b 
+        b b b b b b b b b b b b b b b b 
+        . b b . . . . . . . . . . b b . 
+        `, SpriteKind.goal)
+    tiles.placeOnTile(myDart, tiles.getTileLocation(4, 9))
+    chest.setPosition(137, 73)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.trap, function (sprite, otherSprite) {
     info.changeLifeBy(-1)
@@ -197,8 +196,26 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.trap, function (sprite, otherSpr
     music.play(music.melodyPlayable(music.smallCrash), music.PlaybackMode.UntilDone)
 })
 function R3 () {
+    mySprite = sprites.create(img`
+        . . . . . . 5 . 5 . . . . . . . 
+        . . . . . f 5 5 5 f f . . . . . 
+        . . . . f 1 5 2 5 1 6 f . . . . 
+        . . . f 1 6 6 6 6 6 1 6 f . . . 
+        . . . f 6 6 f f f f 6 1 f . . . 
+        . . . f 6 f f d d f f 6 f . . . 
+        . . f 6 f d f d d f d f 6 f . . 
+        . . f 6 f d 3 d d 3 d f 6 f . . 
+        . . f 6 6 f d d d d f 6 6 f . . 
+        . f 6 6 f 3 f f f f 3 f 6 6 f . 
+        . . f f d 3 5 3 3 5 3 d f f . . 
+        . . f d d f 3 5 5 3 f d d f . . 
+        . . . f f 3 3 3 3 3 3 f f . . . 
+        . . . f 3 3 5 3 3 5 3 3 f . . . 
+        . . . f f f f f f f f f f . . . 
+        . . . . . f f . . f f . . . . . 
+        `, SpriteKind.Player)
     tiles.loadMap(tiles.createMap(tilemap`level8`))
-    mySprite.sayText("Room 3... I need to get 3 math questions and a riddle right to get the key...", 5000, false)
+    game.showLongText("Room 3... Solve all 3 math questions and a riddle right to get the key...", DialogLayout.Center)
     ofquestions = 3
     while (0 < ofquestions) {
         value1 = randint(35, 350)
@@ -221,17 +238,17 @@ function R3 () {
                     R4()
                 } else {
                     game.splash("WRONG!" + "It's  " + answerChecker(mathanswer))
-                    game.splash("YOU DIED! Restart from room 1.")
+                    game.splash("YOU DIED! Fail to answer, fail to escape :(")
                     music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.UntilDone)
-                    R1()
+                    game.gameOver(false)
                 }
             }
         } else {
             ofquestions = 0
             game.splash("WRONG!" + "It's  " + answerChecker(mathanswer))
-            game.splash("YOU DIED! Restart from room 1.")
+            game.splash("YOU DIED! Fail to answer, fail to escape :(")
             music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.UntilDone)
-            R1()
+            game.gameOver(false)
         }
     }
 }
@@ -241,6 +258,7 @@ function answerChecker (correctAnswer: number) {
 info.onLifeZero(function () {
     scene.cameraShake(10, 5000)
     mySprite.sayText("YOU DIED")
+    music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.UntilDone)
     game.gameOver(false)
 })
 function R4 () {
@@ -249,6 +267,7 @@ function R4 () {
     mySprite.sayText("YAY", 500, false)
     game.splash("Your fourth number is", _4)
     RoomNumber4done = true
+    music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
     R5()
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
@@ -267,7 +286,8 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleRedCrystal, fu
         game.gameOver(true)
     } else {
         game.splash("Start over :(")
-        R1()
+        music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.UntilDone)
+        game.gameOver(false)
     }
 })
 function R5 () {
@@ -276,6 +296,7 @@ function R5 () {
     mySprite.sayText("YAY", 500, false)
     game.splash("Your fifth number is", _5)
     RoomNumber5done = true
+    music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
     R6()
 }
 let answer = 0
@@ -286,12 +307,12 @@ let value3 = 0
 let value2 = 0
 let value1 = 0
 let ofquestions = 0
-let villain: Sprite = null
+let chest: Sprite = null
 let mySprite2: Sprite = null
 let trap3r1: Sprite = null
 let trap2r1: Sprite = null
 let trapr1: Sprite = null
-let projectile: Sprite = null
+let myDart: Dart = null
 let RoomNumber6done = false
 let RoomNumber5done = false
 let RoomNumber4done = false
