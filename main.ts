@@ -151,12 +151,16 @@ info.onScore(10, function () {
     mySprite.sayText("YAY", 500, false)
     game.splash("Your first number is ", _1)
     RoomNumber1done = true
+    music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
     R2()
 })
 function R2 () {
+    sprites.destroyAllSpritesOfKind(SpriteKind.trap)
     tiles.placeOnTile(mySprite, tiles.getTileLocation(8, 8))
     tiles.loadMap(tiles.createMap(tilemap`level2`))
-    mySprite.sayText("Room 2... I need to find the enemy and beat them with the A button.")
+    mySprite.sayText("Room 2... I need to fight and beat the enemy with the A button... But also be careful to not step on the lava.", 2000, false)
+    mySprite.sayText("I see... The water can give me a boost in HP.")
+    pause(1000)
     villain = sprites.create(img`
         ........................
         ........................

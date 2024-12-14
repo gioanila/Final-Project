@@ -307,24 +307,6 @@
         ],
         "displayName": "level33"
     },
-    "level2": {
-        "id": "level2",
-        "mimeType": "application/mkcd-tilemap",
-        "data": "MTAxMDAwMTAwMDAyMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTA1MDYwOTA5MDkwOTA5MDkwOTA5MDkwOTA5MDkwOTA5MDgwNjA5MDkwOTA5MDkwOTA5MDkwOTA5MDkwOTA5MDkwODA2MDkwOTA5MDkwOTA5MDkwOTA5MDkwOTA5MDkwOTA4MDYwOTA5MDkwOTA5MDkwOTA5MDkwOTA5MDkwOTA5MDgwNjA5MDkwOTA5MDkwOTA5MDkwOTA5MDkwOTA5MDkwODA2MDkwOTA5MDkwOTA5MDkwOTA5MDkwOTA5MDkwOTA4MDYwOTA5MDkwOTA5MDkwOTA5MDkwOTA5MDkwOTA5MDgwNjA5MDkwOTA5MDkwOTA5MDkwOTA5MDkwOTA5MDkwODA2MDkwOTA5MDkwOTA5MDkwOTA5MDkwOTA5MDkwOTA4MDYwOTA5MDkwOTA5MDkwOTA5MDkwOTA5MDkwOTA5MDgwNjA5MDkwOTA5MDkwOTA5MDkwOTA5MDkwOTA5MDkwODA2MDkwOTA5MDkwOTA5MDkwOTA5MDkwOTA5MDkwOTA4MDYwOTA5MDkwOTA5MDkwOTA5MDkwOTA5MDkwOTA5MDgwNjA5MDkwOTA5MDkwOTA5MDkwOTA5MDkwOTA5MDkwODAzMDcwNzA3MDcwNzA3MDcwNzA3MDcwNzA3MDcwNzA0MjIyMjIyMjIyMjIyMjIyMjAyMDAwMDAwMDAwMDAwMjAwMjAwMDAwMDAwMDAwMDIwMDIwMDAwMDAwMDAwMDAyMDAyMDAwMDAwMDAwMDAwMjAwMjAwMDAwMDAwMDAwMDIwMDIwMDAwMDAwMDAwMDAyMDAyMDAwMDAwMDAwMDAwMjAwMjAwMDAwMDAwMDAwMDIwMDIwMDAwMDAwMDAwMDAyMDAyMDAwMDAwMDAwMDAwMjAwMjAwMDAwMDAwMDAwMDIwMDIwMDAwMDAwMDAwMDAyMDAyMDAwMDAwMDAwMDAwMjAwMjAwMDAwMDAwMDAwMDIwMjIyMjIyMjIyMjIyMjIyMg==",
-        "tileset": [
-            "myTiles.transparency16",
-            "sprites.dungeon.greenOuterNorth0",
-            "sprites.dungeon.greenOuterNorthWest",
-            "sprites.dungeon.greenOuterSouthEast",
-            "sprites.dungeon.greenOuterSouthWest",
-            "sprites.dungeon.greenOuterNorthEast",
-            "sprites.dungeon.greenOuterWest1",
-            "sprites.dungeon.greenOuterSouth0",
-            "sprites.dungeon.greenOuterEast0",
-            "myTiles.tile3"
-        ],
-        "displayName": "level2"
-    },
     "level8": {
         "id": "level8",
         "mimeType": "application/mkcd-tilemap",
@@ -435,6 +417,43 @@
             "sprites.dungeon.greenOuterSouthWest"
         ],
         "displayName": "level6"
+    },
+    "level2": {
+        "id": "level2",
+        "mimeType": "application/mkcd-tilemap",
+        "data": "MTAxMDAwMTAwMDAyMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTA1MDYxNTE3MTcxNzE3MTcxNzEyMTcxNzE3MTcxNzEzMDgwNjE5MWIxOTE5MTkxYzFjMTkxOTE5MTYxYjE2MTYwODA2MTkxNzE5MTIxOTE5MTkxMDE5MTkxNjE2MTYxNjA4MDYxOTE3MTAxOTEwMTkxOTE5MWIxOTFjMTAxNjE2MDgwNjE5MTcxOTE5MTAxOTE5MTkxOTE5MTkxOTE2MTYwODA2MTkxNzE5MTkxOTEwMTkxOTE5MTAxMDE5MTYxNjA4MDYxOTE3MWIxOTE5MTAxOTE5MTkxOTEwMTkxMjE2MDgwNjE5MTcxOTE5MTIxOTE5MTkxOTE5MTAxOTE5MTYwODA2MTkxNzFjMTgxODE4MTgxODE4MTgxODE4MTYxNjA4MDYxOTFiMTkxMDE4MTgxODE4MTIxODFjMWMxMjE2MDgwNjFiMTgxODE4MTgxMDEwMTgxODE4MTAxODE4MTQwODA2MTExMTExMTExMTExMTExMTExMTExMTExMTExMTA4MDYwZjBmMGMwZjBlMGUwZTBhMGEwZDFhMGQwZTBmMDgwNjA5MGIwYjBlMDkwOTA5MGMwYzBjMGMwOTA5MGMwODAzMDcwNzA3MDcwNzA3MDcwNzA3MDcwNzA3MDcwNzA0MjIyMjIyMjIyMjIyMjIyMjAyMDAwMDAwMDAwMDAwMjAwMjAwMDAwMDAwMDAwMDIwMDIwMDAwMDAwMDAwMDAyMDAyMDAwMDAwMDAwMDAwMjAwMjAwMDAwMDAwMDAwMDIwMDIwMDAwMDAwMDAwMDAyMDAyMDAwMDAwMDAwMDAwMjAwMjAwMDAwMDAwMDAwMDIwMDIwMDAwMDAwMDAwMDAyMDAyMDAwMDAwMDAwMDAwMjAwMjAwMDAwMDAwMDAwMDIwMjIyMjIyMjIyMjIyMjIyMjAyMDAwMDAwMDAwMDAwMjAwMjAwMDAwMDAwMDAwMDIwMjIyMjIyMjIyMjIyMjIyMg==",
+        "tileset": [
+            "myTiles.transparency16",
+            "sprites.dungeon.greenOuterNorth0",
+            "sprites.dungeon.greenOuterNorthWest",
+            "sprites.dungeon.greenOuterSouthEast",
+            "sprites.dungeon.greenOuterSouthWest",
+            "sprites.dungeon.greenOuterNorthEast",
+            "sprites.dungeon.greenOuterWest1",
+            "sprites.dungeon.greenOuterSouth0",
+            "sprites.dungeon.greenOuterEast0",
+            "sprites.builtin.crowd8",
+            "sprites.builtin.crowd1",
+            "sprites.builtin.crowd2",
+            "sprites.builtin.crowd3",
+            "sprites.builtin.crowd4",
+            "sprites.builtin.crowd6",
+            "sprites.builtin.crowd0",
+            "sprites.dungeon.hazardLava1",
+            "sprites.castle.rock1",
+            "sprites.castle.saplingPine",
+            "sprites.vehicle.roadTurn2",
+            "sprites.vehicle.roadTurn4",
+            "sprites.vehicle.roadTurn1",
+            "sprites.vehicle.roadIntersection4",
+            "sprites.vehicle.roadIntersection3",
+            "sprites.vehicle.roadIntersection1",
+            "sprites.vehicle.roadIntersection2",
+            "sprites.builtin.crowd9",
+            "sprites.dungeon.hazardLava0",
+            "sprites.dungeon.hazardWater"
+        ],
+        "displayName": "level2"
     },
     "*": {
         "mimeType": "image/x-mkcd-f4",
