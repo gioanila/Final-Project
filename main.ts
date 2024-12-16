@@ -25,7 +25,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         music.play(music.melodyPlayable(music.jumpUp), music.PlaybackMode.UntilDone)
     }
 })
-scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.stairWest, function (sprite, location) {
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.floorDark0, function (sprite, location) {
     game.gameOver(false)
 })
 info.onCountdownEnd(function () {
@@ -297,11 +297,11 @@ function R3 () {
     game.showLongText("Room 3... Solve all 3 math questions AND a riddle right to get the key...", DialogLayout.Center)
     ofquestions = 3
     while (0 < ofquestions) {
-        value1 = randint(35, 350)
+        value1 = randint(35, 156)
         value2 = randint(-4, -46)
-        value3 = randint(583, 234)
-        mathanswer = value1 * value2 + value3
-        userinput = game.askForNumber("What is " + value1 + "x" + value2 + "+" + value3, 6)
+        value3 = randint(2, 29)
+        mathanswer = value1 + value2 + value3
+        userinput = game.askForNumber("What is " + value1 + "" + value2 + "+" + value3, 6)
         if (mathanswer == userinput) {
             ofquestions += -1
             game.splash("Congrats!" + ofquestions + " questions more to go!")
