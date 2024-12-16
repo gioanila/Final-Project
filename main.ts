@@ -130,7 +130,8 @@ info.onScore(10, function () {
     sprites.destroy(mySprite2)
     game.splash("You passed this level!!")
     mySprite.sayText("YAY", 500, false)
-    game.splash("Your first number is ", _1)
+    game.splash("Your first number is ")
+    game.splash(_1)
     RoomNumber1done = true
     music.play(music.melodyPlayable(music.powerUp), music.PlaybackMode.UntilDone)
     R2()
@@ -312,7 +313,8 @@ function R3 () {
                 if (riddle == "wrong") {
                     game.splash("You passed this level!!")
                     mySprite.sayText("YAY", 500, false)
-                    game.splash("Your third number is ", _3)
+                    game.splash("Your third number is ")
+                    game.splash(_3)
                     RoomNumber3done = true
                     R4()
                 } else {
@@ -350,7 +352,8 @@ function R4 () {
             control.reset()
 game.splash("You passed this level!!")
             mySprite.sayText("YAY", 500, false)
-            game.splash("Your fourth number is", _4)
+            game.splash("Your fourth number is")
+            game.splash(_4)
             RoomNumber4done = true
             music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
             R5()
@@ -377,7 +380,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleRedCrystal, function (sprite, location) {
     game.splash("You passed the FINAL level!!")
     mySprite.sayText("YAY", 500, false)
-    game.splash("Your fifth number is", _5)
+    game.splash("Your fifth number is")
+    game.splash(_5)
     RoomNumber5done = true
     music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
     pause(100)
@@ -402,7 +406,8 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleInsignia, func
     game.splash("You passed this level!!")
     mySprite.sayText("YAY", 500, false)
     pause(1000)
-    game.splash("Your second number is", _22)
+    game.splash("Your second number is")
+    game.splash(_22)
     RoomNumber2done = true
     music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
     R3()
