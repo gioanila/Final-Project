@@ -15,7 +15,7 @@ namespace ConnectionKind {
 }
 function R6 () {
     tiles.loadMap(tiles.createMap(tilemap`level17`))
-    tiles.placeOnTile(mySprite, tiles.getTileLocation(1, 1))
+    tiles.placeOnRandomTile(mySprite, sprites.builtin.forestTiles8)
 }
 sprites.onOverlap(SpriteKind.dart, SpriteKind.goal, function (sprite, otherSprite) {
     game.splash("Goal!")
@@ -141,7 +141,7 @@ info.onScore(10, function () {
     mySprite.sayText("YAY", 500, false)
     game.splash("Your first number is ", _1)
     RoomNumber1done = true
-    music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
+    music.play(music.melodyPlayable(music.powerUp), music.PlaybackMode.UntilDone)
     R2()
 })
 function R2 () {
@@ -273,6 +273,7 @@ function R4 () {
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     info.changeScoreBy(1)
     sprites.destroy(otherSprite)
+    music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleRedCrystal, function (sprite, location) {
     game.splash("You passed this level!!")
