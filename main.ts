@@ -685,7 +685,7 @@ mySprite,
 200,
 characterAnimations.rule(Predicate.MovingDown)
 )
-game.showLongText("Welcome to the dungeons... you have 15 minutes to leave before they implode on top of you. Find numbers by going through 6 rooms and completing the challenges, then create a code in order to escape. Best of luck!", DialogLayout.Center)
+game.showLongText("Welcome to the dungeons... you have 10 minutes to leave before they implode on top of you. Find numbers by going through 5 rooms and completing the challenges, then create a code in order to escape. Best of luck!", DialogLayout.Center)
 pauseUntil(() => true)
 info.startCountdown(600)
 RoomNumber1done = false
