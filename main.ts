@@ -343,8 +343,8 @@ info.onLifeZero(function () {
     music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.UntilDone)
 })
 function R4 () {
-    info.setLife(3)
-    game.splash("Room 4...This is like the Hot and Cold game. Guess the correct number within 3 trys!")
+    info.setLife(5)
+    game.splash("Room 4...This is like the Hot and Cold game. Guess the correct number within 5 trys!")
     solution = randint(10, 20)
     while (info.life() > 0) {
         answer = game.askForNumber("I'M THINKING OF A NUMBER BETWEEN 10 AND 20...", 2)
