@@ -139,6 +139,66 @@ info.onScore(10, function () {
 function R2 () {
     sprites.destroyAllSpritesOfKind(SpriteKind.trap)
     sprites.destroyAllSpritesOfKind(SpriteKind.Food)
+    tiles.loadMap(tiles.createMap(tilemap`level17`))
+    tiles.placeOnRandomTile(mySprite, sprites.builtin.forestTiles8)
+    mySprite.sayText("I gotta get through this maze!", 3500, false)
+}
+sprites.onOverlap(SpriteKind.Player, SpriteKind.trap, function (sprite, otherSprite) {
+    info.changeLifeBy(-1)
+    sprites.destroy(otherSprite)
+    mySprite.sayText("OW!", 200, false)
+    music.play(music.melodyPlayable(music.smallCrash), music.PlaybackMode.UntilDone)
+})
+function R3 () {
+    tiles.loadMap(tiles.createMap(tilemap`level8`))
+    game.showLongText("Room 3... Solve all 3 math questions AND a riddle right to get the key...", DialogLayout.Center)
+    ofquestions = 3
+    while (0 < ofquestions) {
+        value1 = randint(35, 156)
+        value2 = randint(-4, -46)
+        value3 = randint(2, 29)
+        mathanswer = value1 + value2 + value3
+        userinput = game.askForNumber("What is " + value1 + "" + value2 + "+" + value3, 6)
+        if (mathanswer == userinput) {
+            ofquestions += -1
+            game.splash("Congrats!" + ofquestions + " questions more to go!")
+            if (ofquestions == 0) {
+                game.splash("You're a math genius! But now...")
+                game.splash("Riddle me this...")
+                riddle = game.askForString("What word is spelled wrong in the dictionary? ")
+                if (riddle == "wrong") {
+                    game.splash("You passed this level!!")
+                    mySprite.sayText("YAY", 500, false)
+                    game.splash("Your third number is ")
+                    game.splash(_3)
+                    RoomNumber3done = true
+                    R4()
+                } else {
+                    game.splash("WRONG!" + "It's  " + answerChecker(mathanswer))
+                    game.splash("YOU DIED! Fail to answer, fail to escape :(")
+                    music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.UntilDone)
+                    game.gameOver(false)
+                }
+            }
+        } else {
+            ofquestions = 0
+            game.splash("WRONG!" + "It's  " + answerChecker(mathanswer))
+            game.splash("YOU DIED! Fail to answer, fail to escape :(")
+            music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.UntilDone)
+            game.gameOver(false)
+        }
+    }
+}
+function answerChecker (correctAnswer: number) {
+    return correctAnswer
+}
+info.onLifeZero(function () {
+    scene.cameraShake(10, 2000)
+    game.splash("YOU DIED")
+    game.gameOver(false)
+    music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.UntilDone)
+})
+function R4 () {
     scene.setBackgroundImage(img`
         9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999966666699969999999999999999999999999999999999999999999999999999
         9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -262,90 +322,12 @@ function R2 () {
         dddddddddd444ddddd3ddddddddddddd4ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd44dddddddddddddddddddddddddddddddddd4ddddddddd
         `)
     tiles.loadMap(tiles.createMap(tilemap`level1`))
-    game.showLongText("Room 2... Jump up the platforms to get the key and teleport to the next room! But be careful not to drop... or else you might die. Press the A button or space bar to jump, and double-press to double jump.", DialogLayout.Bottom)
+    game.showLongText("Room 4... Jump up the platforms to get the key and teleport to the next room! But be careful not to drop... or else you might die. Press the A button or space bar to jump, and double-press to double jump.", DialogLayout.Bottom)
     tiles.placeOnRandomTile(mySprite, sprites.dungeon.collectibleBlueCrystal)
     controller.moveSprite(mySprite, 100, 0)
     playerpos = 30
     gravity = playerpos * 9.8
     mySprite.ay = gravity
-}
-sprites.onOverlap(SpriteKind.Player, SpriteKind.trap, function (sprite, otherSprite) {
-    info.changeLifeBy(-1)
-    sprites.destroy(otherSprite)
-    mySprite.sayText("OW!", 200, false)
-    music.play(music.melodyPlayable(music.smallCrash), music.PlaybackMode.UntilDone)
-})
-function R3 () {
-    mySprite = sprites.create(img`
-        . . . . . . 5 . 5 . . . . . . . 
-        . . . . . f 5 5 5 f f . . . . . 
-        . . . . f 1 5 2 5 1 6 f . . . . 
-        . . . f 1 6 6 6 6 6 1 6 f . . . 
-        . . . f 6 6 f f f f 6 1 f . . . 
-        . . . f 6 f f d d f f 6 f . . . 
-        . . f 6 f d f d d f d f 6 f . . 
-        . . f 6 f d 3 d d 3 d f 6 f . . 
-        . . f 6 6 f d d d d f 6 6 f . . 
-        . f 6 6 f 3 f f f f 3 f 6 6 f . 
-        . . f f d 3 5 3 3 5 3 d f f . . 
-        . . f d d f 3 5 5 3 f d d f . . 
-        . . . f f 3 3 3 3 3 3 f f . . . 
-        . . . f 3 3 5 3 3 5 3 3 f . . . 
-        . . . f f f f f f f f f f . . . 
-        . . . . . f f . . f f . . . . . 
-        `, SpriteKind.Player)
-    tiles.loadMap(tiles.createMap(tilemap`level8`))
-    game.showLongText("Room 3... Solve all 3 math questions AND a riddle right to get the key...", DialogLayout.Center)
-    ofquestions = 3
-    while (0 < ofquestions) {
-        value1 = randint(35, 156)
-        value2 = randint(-4, -46)
-        value3 = randint(2, 29)
-        mathanswer = value1 + value2 + value3
-        userinput = game.askForNumber("What is " + value1 + "" + value2 + "+" + value3, 6)
-        if (mathanswer == userinput) {
-            ofquestions += -1
-            game.splash("Congrats!" + ofquestions + " questions more to go!")
-            if (ofquestions == 0) {
-                game.splash("You're a math genius! But now...")
-                game.splash("Riddle me this...")
-                riddle = game.askForString("What word is spelled wrong in the dictionary? ")
-                if (riddle == "wrong") {
-                    game.splash("You passed this level!!")
-                    mySprite.sayText("YAY", 500, false)
-                    game.splash("Your third number is ")
-                    game.splash(_3)
-                    RoomNumber3done = true
-                    R4()
-                } else {
-                    game.splash("WRONG!" + "It's  " + answerChecker(mathanswer))
-                    game.splash("YOU DIED! Fail to answer, fail to escape :(")
-                    music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.UntilDone)
-                    game.gameOver(false)
-                }
-            }
-        } else {
-            ofquestions = 0
-            game.splash("WRONG!" + "It's  " + answerChecker(mathanswer))
-            game.splash("YOU DIED! Fail to answer, fail to escape :(")
-            music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.UntilDone)
-            game.gameOver(false)
-        }
-    }
-}
-function answerChecker (correctAnswer: number) {
-    return correctAnswer
-}
-info.onLifeZero(function () {
-    scene.cameraShake(10, 2000)
-    game.splash("YOU DIED")
-    game.gameOver(false)
-    music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.UntilDone)
-})
-function R4 () {
-    tiles.loadMap(tiles.createMap(tilemap`level17`))
-    tiles.placeOnRandomTile(mySprite, sprites.builtin.forestTiles8)
-    mySprite.sayText("I gotta get through this maze and finally unlock the escape room!!!", 3500, false)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     info.changeScoreBy(1)
@@ -353,25 +335,25 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
     music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleRedCrystal, function (sprite, location) {
-    game.splash("You passed the FINAL level!!")
+    game.splash("You passed this level!!")
     mySprite.sayText("YAY", 500, false)
-    game.splash("Your fifth number is")
-    game.splash(_5)
+    game.splash("Your second number is")
+    game.splash(_2)
     RoomNumber5done = true
     music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
-    R5()
+    R3()
 })
 function R5 () {
     info.setLife(5)
-    game.splash("Room 4...This is like the Hot and Cold game. Guess the correct number within 5 trys!")
+    game.splash("Room 5...This is like the Hot and Cold game. Guess the correct number within 5 trys!")
     solution = randint(10, 20)
     while (info.life() > 0) {
         answer = game.askForNumber("I'M THINKING OF A NUMBER BETWEEN 10 AND 20...", 2)
         if (answer == solution) {
-            game.splash("You passed this level!!")
+            game.splash("You passed the FINAL level!!")
             mySprite.sayText("YAY", 500, false)
-            game.splash("Your fourth number is")
-            game.splash(_4)
+            game.splash("Your fifth number is")
+            game.splash(_5)
             pause(100)
             answer2 = game.askForNumber("What is the code?", 5)
             if (answer2 == _1 * 10000 + (_2 * 1000 + (_3 * 100 + (_4 * 10 + _5 * 1)))) {
@@ -400,20 +382,21 @@ function R5 () {
     }
 }
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleInsignia, function (sprite, location) {
-    let _22 = 0
     game.splash("You passed this level!!")
     mySprite.sayText("YAY", 500, false)
     pause(1000)
-    game.splash("Your second number is")
-    game.splash(_22)
+    game.splash("Your fourth number is")
+    game.splash(_4)
     RoomNumber2done = true
     music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
-    R3()
+    R5()
 })
 let hint = ""
 let answer2 = 0
 let answer = 0
 let solution = 0
+let gravity = 0
+let playerpos = 0
 let riddle = ""
 let userinput = 0
 let mathanswer = 0
@@ -421,8 +404,6 @@ let value3 = 0
 let value2 = 0
 let value1 = 0
 let ofquestions = 0
-let gravity = 0
-let playerpos = 0
 let mySprite2: Sprite = null
 let trap3r1: Sprite = null
 let trap2r1: Sprite = null
