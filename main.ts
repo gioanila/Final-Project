@@ -682,7 +682,6 @@ let room3 = tiles.createMap(tilemap`level8`)
 let room4 = tiles.createMap(tilemap`level13`)
 let room5 = tiles.createMap(tilemap`level15`)
 let list = [
-0,
 1,
 2,
 3,
