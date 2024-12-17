@@ -174,7 +174,7 @@ function R3 () {
                     RoomNumber3done = true
                     R4()
                 } else {
-                    game.splash("WRONG!" + "It's  " + answerChecker(mathanswer))
+                    game.splash("WRONG!" + "It's  " + "\"wrong\"" + ".")
                     game.splash("YOU DIED! Fail to answer, fail to escape :(")
                     music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.UntilDone)
                     game.gameOver(false)
