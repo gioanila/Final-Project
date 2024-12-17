@@ -153,7 +153,7 @@ function R3 () {
     tiles.loadMap(tiles.createMap(tilemap`level8`))
     game.showLongText("Room 3... Solve all 3 math questions AND a riddle right to get the key...", DialogLayout.Center)
     ofquestions = 3
-    while (0 < ofquestions) {
+    while (!(0 > ofquestions)) {
         value1 = randint(35, 156)
         value2 = randint(-4, -46)
         value3 = randint(2, 29)
