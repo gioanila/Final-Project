@@ -166,7 +166,7 @@ function R3 () {
                 game.splash("You're a math genius! But now...")
                 game.splash("Riddle me this...")
                 riddle = game.askForString("What word is spelled wrong in the dictionary? ")
-                if (riddle == "wrong") {
+                if (riddle == "wrong" || riddle == "WRONG") {
                     game.splash("You passed this level!!")
                     mySprite.sayText("YAY", 500, false)
                     game.splash("Your third number is ")
