@@ -343,34 +343,9 @@ info.onLifeZero(function () {
     music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.UntilDone)
 })
 function R4 () {
-    info.setLife(5)
-    game.splash("Room 4...This is like the Hot and Cold game. Guess the correct number within 5 trys!")
-    solution = randint(10, 20)
-    while (info.life() > 0) {
-        answer = game.askForNumber("I'M THINKING OF A NUMBER BETWEEN 10 AND 20...", 2)
-        if (answer == solution) {
-            control.reset()
-game.splash("You passed this level!!")
-            mySprite.sayText("YAY", 500, false)
-            game.splash("Your fourth number is")
-            game.splash(_4)
-            RoomNumber4done = true
-            music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
-            R5()
-        } else {
-            info.changeLifeBy(-1)
-            if (info.life() > 0) {
-                hint = "HIGHER"
-                if (answer > solution) {
-                    hint = "LOWER"
-                }
-                game.splash("SORRY, TRY " + hint)
-            } else {
-                game.splash("SORRY, IT WAS \"" + solution + "\"")
-                game.gameOver(false)
-            }
-        }
-    }
+    tiles.loadMap(tiles.createMap(tilemap`level17`))
+    tiles.placeOnRandomTile(mySprite, sprites.builtin.forestTiles8)
+    mySprite.sayText("I gotta get through this maze and finally unlock the escape room!!!", 3500, false)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     info.changeScoreBy(1)
@@ -384,22 +359,45 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleRedCrystal, fu
     game.splash(_5)
     RoomNumber5done = true
     music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
-    pause(100)
-    answer2 = game.askForNumber("What is the code?", 5)
-    if (answer2 == _1 * 10000 + (_2 * 1000 + (_3 * 100 + (_4 * 10 + _5 * 1)))) {
-        game.splash("You escaped!")
-        game.gameOver(true)
-        game.setGameOverEffect(true, effects.confetti)
-    } else {
-        game.splash("Start over :(")
-        music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.UntilDone)
-        game.gameOver(false)
-    }
+    R5()
 })
 function R5 () {
-    tiles.loadMap(tiles.createMap(tilemap`level17`))
-    tiles.placeOnRandomTile(mySprite, sprites.builtin.forestTiles8)
-    mySprite.sayText("I gotta get through this maze and finally unlock the escape room!!!", 3500, false)
+    info.setLife(5)
+    game.splash("Room 4...This is like the Hot and Cold game. Guess the correct number within 5 trys!")
+    solution = randint(10, 20)
+    while (info.life() > 0) {
+        answer = game.askForNumber("I'M THINKING OF A NUMBER BETWEEN 10 AND 20...", 2)
+        if (answer == solution) {
+            game.splash("You passed this level!!")
+            mySprite.sayText("YAY", 500, false)
+            game.splash("Your fourth number is")
+            game.splash(_4)
+            pause(100)
+            answer2 = game.askForNumber("What is the code?", 5)
+            if (answer2 == _1 * 10000 + (_2 * 1000 + (_3 * 100 + (_4 * 10 + _5 * 1)))) {
+                game.splash("You escaped!")
+                game.gameOver(true)
+                game.setGameOverEffect(true, effects.confetti)
+            } else {
+                game.splash("Start over :(")
+                music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.UntilDone)
+                game.gameOver(false)
+            }
+        } else {
+            info.changeLifeBy(-1)
+            if (answer < solution) {
+                hint = "HIGHER"
+                game.splash("SORRY, TRY " + hint)
+            } else if (answer > solution) {
+                hint = "LOWER"
+                game.splash("SORRY, TRY " + hint)
+            }
+        }
+    }
+    if (info.life() == 0) {
+        game.splash("SORRY, IT WAS \"" + solution + "\"")
+        game.gameOver(false)
+    }
 }
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleInsignia, function (sprite, location) {
     let _22 = 0
@@ -412,8 +410,8 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleInsignia, func
     music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
     R3()
 })
-let answer2 = 0
 let hint = ""
+let answer2 = 0
 let answer = 0
 let solution = 0
 let riddle = ""
@@ -435,7 +433,6 @@ let _3 = 0
 let _2 = 0
 let _1 = 0
 let RoomNumber5done = false
-let RoomNumber4done = false
 let RoomNumber3done = false
 let RoomNumber1done = false
 let mySprite: Sprite = null
@@ -695,7 +692,7 @@ pauseUntil(() => true)
 info.startCountdown(600)
 RoomNumber1done = false
 RoomNumber3done = false
-RoomNumber4done = false
+let RoomNumber4done = false
 RoomNumber5done = false
 let RoomNumber6done = false
 let room1 = tiles.createMap(tilemap`level6`)
@@ -715,11 +712,11 @@ let list = [
 8,
 9
 ]
-_1 = list[randint(0, 10)]
-_2 = list[randint(0, 10)]
-_3 = list[randint(0, 10)]
-_4 = list[randint(0, 10)]
-_5 = list[randint(0, 10)]
+_1 = list._pickRandom()
+_2 = list._pickRandom()
+_3 = list._pickRandom()
+_4 = list._pickRandom()
+_5 = list._pickRandom()
 if (RoomNumber1done == false) {
     R1()
 }
